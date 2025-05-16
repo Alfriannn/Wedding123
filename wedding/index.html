@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wedding</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+
+    <!-- simplyCountdown -->
+    
+    <script src="countdown/simplyCountdown.min.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+
+      <link id="theme-css" rel="stylesheet" href="style1.css"/>
+      <link id="countdown-theme-css" rel="stylesheet" href="countdown/theme/tema1.css"/>
+    
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  </head>
+
+  <tag>
+    <section
+      id="hero"
+      class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white"
+    >
+      <main>
+        <h4>Kepada <span>Bapak/Ibu/Saudara/i, </span></h4>
+        <h1 id="couple-names">Loading...</h1>
+        <p>Akan melangsungkan resepsi pernikahan dalam:</p>
+        <div class="simply-countdown"></div>
+        <a href="#home" class="btn btn-lg mt-4" onClick="enableScroll()"
+          >Lihat Undangan</a
+        >
+      </main>
+    </section>
+
+    <nav class="navbar navbar-expand-md bg-transparent sticky-top mynavbar">
+      <div class="container">
+        <a class="navbar-brand" href="#">Wedding</a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Wedding</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link" href="#home">Home</a>
+              <a class="nav-link" href="#info">Info</a>
+              <a class="nav-link" href="#story">Story</a>
+              <a class="nav-link" href="#gallery">Gallery</a>
+              <a class="nav-link" href="#rsvp">RSVP</a>
+              <a class="nav-link" href="#guestbook">Ucapan</a>
+              <a class="nav-link" href="#gifts">Gifts</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="home">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2>Acara Pernikahan</h2>
+            <h3 id="event-date-location">Loading...</h3>
+            <p>
+              Oleh karena itu, dengan segala hormat, kami bermaksud untuk
+              mengundang Bapak/Ibu, Saudara/i, untuk hadir pada acara pernikahan
+              kami.
+            </p>
+          </div>
+        </div>
+
+        <div class="row couple">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-8 text-end">
+                <h3 id="groom-name">Loading...</h3>
+                <p id="groom-description">Loading...</p>
+                <p id="groom-parents">Loading...</p>
+              </div>
+              <div class="col-4">
+                <img
+                  src="img/gallery/pria.jpg"
+                  alt="Groom"
+                  class="img-responsive rounded-circle"
+                />
+              </div>
+            </div>
+          </div>
+
+          <span class="heart"><i class="bi bi-heart-fill"></i></span>
+
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-4">
+                <img
+                  src="img/gallery/images.jpg"
+                  alt="Bride"
+                  class="img-responsive rounded-circle"
+                />
+              </div>
+              <div class="col-8">
+                <h3 id="bride-name">Loading...</h3>
+                <p id="bride-description">Loading...</p>
+                <p id="bride-parents">Loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="info" class="info">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <p class="Informasi">Informasi Acara</p>
+            <p class="alamat" id="venue-address">Loading...</p>
+
+            <!-- Iframe --> 
+    <iframe
+      id="google-maps-iframe"
+      src="<?= htmlspecialchars($wedding_data['event']['location']['maps_url']) ?>"
+      width="100%"
+      height="250"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+              
+            <p class="description">
+              Diharapkan untuk tidak salah alamat dan tanggal. Manakala tiba di
+              tujuan namun tidak ada tanda-tanda sedang dilangsungkan
+              pernikahan, boleh jadi Anda salah jadwal, atau salah tempat.
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-5 col-10">
+            <div class="card text-center text-bg-light mb-5">
+              <div class="card-header">Akad Nikah</div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <i class="bi bi-clock d-block"></i>
+                    <span id="ceremony-time">Loading...</span>
+                  </div>
+                  <div class="col-md-6">
+                    <i class="bi bi-calendar3 d-block"></i>
+                    <span id="ceremony-date">Loading...</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer" id="ceremony-description">
+                Loading...
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 col-10">
+            <div class="card text-center text-bg-light">
+              <div class="card-header">Resepsi</div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <i class="bi bi-clock d-block"></i>
+                    <span id="reception-time">Loading...</span>
+                  </div>
+                  <div class="col-md-6">
+                    <i class="bi bi-calendar3 d-block"></i>
+                    <span id="reception-date">Loading...</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer" id="reception-description">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rest of HTML remains the same -->
+
+    <section id="story" class="story">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <span>Bagaimana Cinta Kami Bersemi</span>
+            <h2>Cerita Kami</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro,
+              similique non soluta nulla asperiores voluptatem.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <ul class="timeline">
+              <li>
+                <div
+                  class="timeline-image"
+                  style="background-image: url(img/sman23.jpg)"
+                ></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h3>Pertama Bertemu</h3>
+                    <span>23 Januari 1999</span>
+                  </div>
+                  <div class="timeline-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Quos, modi autem? Commodi autem quo quia?
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div
+                  class="timeline-image"
+                  style="background-image: url(https://picsum.photos/300/300)"
+                ></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h3>Mulai Serius</h3>
+                    <span>1 Januari 2005</span>
+                  </div>
+                  <div class="timeline-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Architecto enim eaque obcaecati odit itaque explicabo
+                      quisquam quos at.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div
+                  class="timeline-image"
+                  style="background-image: url(https://picsum.photos/301/301)"
+                ></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h3>Tunangan</h3>
+                    <span>7 November 1995</span>
+                  </div>
+                  <div class="timeline-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet, deleniti distinctio. Esse quas sit explicabo
+                    corporis magni qui expedita a.
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <!-- Gallery section remains unchanged -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <span>Memori Kisah Kami</span>
+            <h2>Galeri Foto</h2>
+            <p>
+              Ini Adalah Galeri Foto Kami.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center"
+        >
+          <div class="col mt-3">
+            <a
+              href="https://picsum.photos/id/330/1200/768"
+              data-toggle="lightbox"
+              data-caption="Photos 1"
+              data-gallery="mygallery"
+            >
+              <img
+                src="https://picsum.photos/id/330/300/400"
+                alt="Wedding Photo 1"
+                class="img-fluid w-100 rounded"
+              />
+            </a>
+          </div>
+          <div class="col mt-3">
+            <a
+              href="https://picsum.photos/id/300/1200/768"
+              data-toggle="lightbox"
+              data-caption="Photos 2"
+              data-gallery="mygallery"
+            >
+              <img
+                src="https://picsum.photos/id/300/300/400"
+                alt="Wedding Photo 2"
+                class="img-fluid w-100 rounded"
+              />
+            </a>
+          </div>
+          <div class="col mt-3">
+            <a
+              href="https://picsum.photos/id/301/1200/768"
+              data-toggle="lightbox"
+              data-caption="Photos 3"
+              data-gallery="mygallery"
+            >
+              <img
+                src="https://picsum.photos/id/301/300/400"
+                alt="Wedding Photo 3"
+                class="img-fluid w-100 rounded"
+              />
+            </a>
+          </div>
+          <div class="col mt-3">
+            <a
+              href="https://picsum.photos/id/302/1200/768"
+              data-toggle="lightbox"
+              data-caption="Photos 4"
+              data-gallery="mygallery"
+            >
+              <img
+                src="https://picsum.photos/id/302/300/400"
+                alt="Wedding Photo 4"
+                class="img-fluid w-100 rounded"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rsvp" class="rsvp">
+      <!-- RSVP section remains unchanged -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <h2>Konfirmasi Kehadiran</h2>
+            <p>Isi form di bawah ini untuk melakukan konfirmasi kehadiran.</p>
+          </div>
+        </div>
+
+        <form
+          class="row row-cols-md-auto g-3 align-items-center justify-content-center"
+          method="POST"
+          action="https://script.google.com/macros/s/AKfycbyddFbEJRqwEeA6OmZAuNf0jw_B30ZUOS5qSDwlAKV_nurcW7H6osJx2ZWnIeTmPm_35g/exec"
+          id="my-form"
+        >
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="nama" class="form-label">Nama</label>
+              <input type="text" class="form-control" id="nama" name="nama" />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="jumlah" class="form-label">Jumlah</label>
+              <input
+                type="number"
+                class="form-control"
+                id="jumlah"
+                name="jumlah"
+                min="1"
+                max="5"
+                length="1"
+                value="1"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="status" class="form-label">Konfirmasi</label>
+              <select name="status" id="status" class="form-select">
+                <option selected>Pilih salah satu</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Tidak Hadir</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12" style="margin-top: 35px">
+            <button class="btn btn-primary">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Add this section before the footer in index.html -->
+<section id="guestbook" class="guestbook">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-10 text-center">
+        <span>ucapan & doa restu</span>
+        <h2>Buku Tamu</h2>
+        <p>Berikan ucapan dan doa restu Anda untuk kedua mempelai</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Form for submitting messages -->
+        <form id="guestbook-form" class="mb-5">
+          <div class="mb-3">
+            <label for="guest-name" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="guest-name" required>
+          </div>
+          <div class="mb-3">
+            <label for="guest-message" class="form-label">Ucapan/Doa</label>
+            <textarea class="form-control" id="guest-message" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Kirim Ucapan</button>
+        </form>
+
+        <!-- Container for displaying messages -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0">Ucapan & Doa</h5>
+          </div>
+          <div class="card-body">
+            <div id="guestbook-messages" class="list-group list-group-flush">
+              <!-- Messages will be loaded here -->
+              <div class="text-center py-3" id="loading-messages">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="gifts" class="gifts">
+      <!-- Gifts section remains unchanged -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-10 text-center">
+            <span>ungkapan tanda kasih</span>
+            <h2>Kirim Hadiah</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
+              iure perferendis provident ab aliquam nemo.
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+          <div class="col-md-6">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="fw-bold">BCA</div>
+                123456789 - Lorem
+              </li>
+              <li class="list-group-item">
+                <div class="fw-bold">MANDIRI</div>
+                987654321 - Ipsum
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <small class="block">&copy; Wedding. All Rights Reserved.</small>
+            <small class="block">Design by <a href="#">@Fahrul Alfrian Permana Jati</a>.</small>
+
+            <ul class="mt-3">
+              <li>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="bi bi-tiktok"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="audio-container">
+      <audio id="song" autoplay loop>
+        <source src="audio/wedding1.mp3" type="audio/mp3" />
+      </audio>
+
+      <div class="audio-icon-wrapper" style="display: none">
+        <i class="bi bi-disc"></i>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+
+    <script>
+      // Firebase configuration - replace with your actual Firebase config
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        databaseURL:
+          "https://wedding2-ffa73-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Reference to the Firebase database
+      const database = firebase.database();
+      const weddingDataRef = database.ref("wedding-data");
+
+      // Function to format date from yyyy-mm-dd to readable format
+      function formatDate(dateString) {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const date = new Date(dateString);
+        return date.toLocaleDateString("id-ID", options);
+      }
+
+      // Load wedding data from Firebase
+      weddingDataRef.on("value", (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        // Update couple names
+        document.getElementById(
+          "couple-names"
+        ).textContent = `${data.couple.groom.name} & ${data.couple.bride.name}`;
+
+        // Update event date and location
+        document.getElementById(
+          "event-date-location"
+        ).textContent = `Diselenggarakan pada ${formatDate(
+          data.event.date
+        )} di ${data.event.location.name}.`;
+
+        // Update groom details
+        document.getElementById("groom-name").textContent =
+          data.couple.groom.name;
+        document.getElementById("groom-description").textContent =
+          data.couple.groom.description;
+        document.getElementById(
+          "groom-parents"
+        ).innerHTML = `Putra dari Bpk. ${data.couple.groom.father} <br> dan <br> Ibu ${data.couple.groom.mother}`;
+
+        // Update bride details
+        document.getElementById("bride-name").textContent =
+          data.couple.bride.name;
+        document.getElementById("bride-description").textContent =
+          data.couple.bride.description;
+        document.getElementById(
+          "bride-parents"
+        ).innerHTML = `Putri dari Bpk. ${data.couple.bride.father} <br> dan <br> Ibu ${data.couple.bride.mother}`;
+
+        // Update venue details
+        document.getElementById("venue-address").textContent = `Alamat: ${data.event.location.name}, ${data.event.location.address}`;
+
+    // Memperbarui link Google Maps pada elemen #maps-link
+    const mapsLink = document.getElementById("maps-link");
+    if (mapsLink) {
+      mapsLink.href = data.event.location.maps_url;
+    }
+
+    // Memperbarui iframe jika diperlukan
+    const googleMapsIframe = document.getElementById("google-maps-iframe");
+    if (googleMapsIframe) {
+      googleMapsIframe.src = data.event.location.maps_url; // Ganti dengan URL baru
+    }
+
+        // Update ceremony details
+        document.getElementById("ceremony-time").textContent =
+          data.event.ceremony.time;
+        document.getElementById("ceremony-date").textContent = formatDate(
+          data.event.date
+        );
+        document.getElementById("ceremony-description").textContent =
+          data.event.ceremony.description;
+
+        // Update reception details
+        document.getElementById("reception-time").textContent =
+          data.event.reception.time;
+        document.getElementById("reception-date").textContent = formatDate(
+          data.event.date
+        );
+        document.getElementById("reception-description").textContent =
+          data.event.reception.description;
+
+
+  // Fungsi ini sudah ada di bagian lain dari kode Anda, jadi buat fungsi terpisah agar tidak duplikat
+function updateTheme(data) {
+    // Update tema utama
+    const themeLink = document.getElementById("theme-css");
+    if (themeLink) {
+        themeLink.href = `style${data.theme.current.replace('tema', '')}.css`;
+    }
+
+    // Update tema countdown
+    const countdownThemeLink = document.getElementById("countdown-theme-css");
+    if (countdownThemeLink) {
+        countdownThemeLink.href = `countdown/theme/${data.theme.countdown}.css`;
+    }
+}
+
+// Panggil updateTheme dalam listener utama
+weddingDataRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    if (!data) return;
+    
+    // Kode yang sudah ada tetap disini...
+    
+    // Tambahkan panggilan untuk update tema
+    updateTheme(data);
+});
+        // Update countdown
+        simplyCountdown(".simply-countdown", {
+          year: data.countdown.year,
+          month: data.countdown.month,
+          day: data.countdown.day,
+          hours: data.countdown.hour,
+          words: {
+            days: { singular: "hari", plural: "hari" },
+            hours: { singular: "jam", plural: "jam" },
+            minutes: { singular: "menit", plural: "menit" },
+            seconds: { singular: "detik", plural: "detik" },
+          },
+        });
+      });
+    </script>
+
+    <script>
+      const stickyTop = document.querySelector(".sticky-top");
+      const offcanvas = document.querySelector(".offcanvas");
+
+      offcanvas.addEventListener("show.bs.offcanvas", function () {
+        stickyTop.style.overflow = "visible";
+      });
+
+      offcanvas.addEventListener("hidden.bs.offcanvas", function () {
+        stickyTop.style.overflow = "hidden";
+      });
+    </script>
+
+    <script>
+      const rootElement = document.querySelector(":root");
+      const audioIconWrapper = document.querySelector(".audio-icon-wrapper");
+      const audioIcon = document.querySelector(".audio-icon-wrapper i");
+      const song = document.querySelector("#song");
+      let isPlaying = false;
+
+      function disableScroll() {
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+        window.onscroll = function () {
+          window.scrollTo(scrollTop, scrollLeft);
+        };
+
+        rootElement.style.scrollBehavior = "auto";
+      }
+
+      function enableScroll() {
+        window.onscroll = function () {};
+        rootElement.style.scrollBehavior = "smooth";
+        playAudio();
+      }
+
+      function playAudio() {
+        song.volume = 0.1;
+        audioIconWrapper.style.display = "flex";
+        song.play();
+        isPlaying = true;
+      }
+
+      audioIconWrapper.onclick = function () {
+        if (isPlaying) {
+          song.pause();
+          audioIcon.classList.remove("bi-disc");
+          audioIcon.classList.add("bi-pause-circle");
+        } else {
+          song.play();
+          audioIcon.classList.add("bi-disc");
+          audioIcon.classList.remove("bi-pause-circle");
+        }
+
+        isPlaying = !isPlaying;
+      };
+
+      disableScroll();
+    </script>
+
+
+<script>
+  window.addEventListener("load", function () {
+    const form = document.getElementById("my-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      
+      // Get form data
+      const nama = document.getElementById("nama").value;
+      const jumlah = document.getElementById("jumlah").value;
+      const status = document.getElementById("status").value;
+      
+      // Validate
+      if (!nama || !status || status === "Pilih salah satu") {
+        alert("Mohon lengkapi semua data!");
+        return;
+      }
+      
+      // Create RSVP data object
+      const rsvpData = {
+        name: nama,
+        number_of_guests: parseInt(jumlah),
+        attendance: status,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Save to Firebase
+      const newRsvpRef = firebase.database().ref('rsvp').push();
+      newRsvpRef.set(rsvpData)
+        .then(() => {
+          alert("Konfirmasi kehadiran berhasil terkirim!");
+          form.reset();
+        })
+        .catch((error) => {
+          alert("Error: " + error.message);
+        });
+    });
+  });
+</script>
+
+
+<script>
+  // Guestbook functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const guestbookForm = document.getElementById('guestbook-form');
+    const messagesContainer = document.getElementById('guestbook-messages');
+    const loadingIndicator = document.getElementById('loading-messages');
+    
+    // Reference to the Firebase guestbook
+    const guestbookRef = firebase.database().ref('guest_book');
+    
+    // Submit new message
+    guestbookForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('guest-name');
+      const messageInput = document.getElementById('guest-message');
+      
+      // Validate inputs
+      if (!nameInput.value.trim() || !messageInput.value.trim()) {
+        alert('Mohon isi nama dan ucapan Anda');
+        return;
+      }
+      
+      // Create new message object
+      const newMessage = {
+        name: nameInput.value.trim(),
+        message: messageInput.value.trim(),
+        timestamp: new Date().toISOString()
+      };
+      
+      // Push to Firebase
+      guestbookRef.push(newMessage)
+        .then(() => {
+          // Clear form
+          nameInput.value = '';
+          messageInput.value = '';
+          alert('Ucapan berhasil dikirim!');
+        })
+        .catch((error) => {
+          alert('Error: ' + error.message);
+        });
+    });
+    
+    // Add this to your guestbook script in the index.html file
+function loadMessages() {
+  // Clear messages container
+  while (messagesContainer.firstChild) {
+    messagesContainer.removeChild(messagesContainer.firstChild);
+  }
+  
+  // Show loading indicator
+  loadingIndicator.style.display = 'block';
+  
+  // Query the most recent 50 messages
+  guestbookRef.orderByChild('timestamp').limitToLast(50).on('value', (snapshot) => {
+    // Hide loading indicator
+    loadingIndicator.style.display = 'none';
+    
+    // Check if there are any messages
+    if (!snapshot.exists()) {
+      const noMessages = document.createElement('div');
+      noMessages.className = 'text-center py-3';
+      noMessages.textContent = 'Belum ada ucapan';
+      messagesContainer.appendChild(noMessages);
+      return;
+    }
+    
+    // Clear any existing messages
+    while (messagesContainer.firstChild) {
+      messagesContainer.removeChild(messagesContainer.firstChild);
+    }
+    
+    // Convert the snapshot to an array and reverse it to show newest first
+    const messages = [];
+    snapshot.forEach((childSnapshot) => {
+      messages.push({
+        id: childSnapshot.key,
+        ...childSnapshot.val()
+      });
+    });
+    
+    // Display messages in reverse chronological order
+    messages.reverse().forEach((msg) => {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'list-group-item';
+      
+      const nameElement = document.createElement('h6');
+      nameElement.className = 'mb-1';
+      nameElement.textContent = msg.name;
+      
+      const dateElement = document.createElement('small');
+      dateElement.className = 'text-muted d-block';
+      
+      // Format the timestamp
+      const date = new Date(msg.timestamp);
+      const formattedDate = date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      dateElement.textContent = formattedDate;
+      
+      const textElement = document.createElement('p');
+      textElement.className = 'mb-1 mt-2';
+      textElement.textContent = msg.message;
+      
+      messageElement.appendChild(nameElement);
+      messageElement.appendChild(dateElement);
+      messageElement.appendChild(textElement);
+      
+      // Add admin reply section if it exists
+      if (msg.admin_reply) {
+        const adminReplyElement = document.createElement('div');
+        adminReplyElement.className = 'admin-reply mt-2';
+        
+        const adminHeader = document.createElement('div');
+        adminHeader.className = 'd-flex justify-content-between align-items-start';
+        
+        const adminBadge = document.createElement('div');
+        adminBadge.innerHTML = '<span class="admin-badge">Admin</span> <span class="fw-bold">Balasan:</span>';
+        
+        adminHeader.appendChild(adminBadge);
+        
+        const adminText = document.createElement('p');
+        adminText.className = 'mb-1 mt-1';
+        adminText.textContent = msg.admin_reply;
+        
+        // Add reply timestamp if it exists
+        if (msg.reply_timestamp) {
+          const replyDate = new Date(msg.reply_timestamp);
+          const formattedReplyDate = replyDate.toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'Asia/Jakarta'
+          });
+          
+          const replyTimestamp = document.createElement('div');
+          replyTimestamp.className = 'timestamp';
+          replyTimestamp.innerHTML = `<i class="far fa-clock me-1"></i> ${formattedReplyDate}`;
+          
+          adminReplyElement.appendChild(adminHeader);
+          adminReplyElement.appendChild(adminText);
+          adminReplyElement.appendChild(replyTimestamp);
+        } else {
+          adminReplyElement.appendChild(adminHeader);
+          adminReplyElement.appendChild(adminText);
+        }
+        
+        messageElement.appendChild(adminReplyElement);
+      }
+      
+      messagesContainer.appendChild(messageElement);
+    });
+  }, (error) => {
+    console.error('Error loading messages:', error);
+    loadingIndicator.style.display = 'none';
+    
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'alert alert-danger';
+    errorMessage.textContent = 'Gagal memuat ucapan: ' + error.message;
+    messagesContainer.appendChild(errorMessage);
+  });
+}
+    
+    // Initialize message loading
+    loadMessages();
+  });
+</script>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const nama = urlParams.get("n") || "";
+      const pronoun = urlParams.get("p") || "Bapak/Ibu/Saudara/i";
+      const namaContainer = document.querySelector(".hero h4 span");
+      namaContainer.innerText = `${pronoun} ${nama},`.replace(/ ,$/, ",");
+
+      document.querySelector("#nama").value = nama;
+    </script>
+
+<style>
+  /* Admin reply styling - with !important untuk memastikan prioritas */
+  .admin-reply {
+    background-color: #f8f9fa !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    margin-top: 0.75rem !important;
+    border-left: 3px solid #0d6efd !important;
+  }
+
+  .admin-badge {
+    background-color: #0d6efd !important;
+    color: white !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 0.25rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .timestamp {
+    font-size: 0.75rem !important;
+    color: #6c757d !important;
+    margin-top: 0.5rem !important;
+  }
+</style>
+
+  </body>
+</html>

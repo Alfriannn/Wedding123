@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Tema Undangan Digital</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+      --primary-color: #b87333;
+      --secondary-color: #94592a;
+      --accent-color: #e9c46a;
+      --dark-color: #2d2d2d;
+      --light-color: #f8f5f2;
+      --text-color: #3d3d3d;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-color);
+      line-height: 1.7;
+    }
+    
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wedding/img/imgorder/bg.jpg') center/cover no-repeat;
+      padding: 140px 0;
+      color: white;
+      margin-bottom: 80px;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    
+    .hero-section h1 {
+      font-size: 60px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 15px;
+    }
+    
+    .hero-section p {
+      font-size: 20px;
+      font-weight: 300;
+      max-width: 700px;
+      margin: 20px auto 0;
+      line-height: 1.6;
+    }
+    
+    .accent-text {
+      color: var(--accent-color);
+    }
+    
+    .divider {
+      position: relative;
+      height: 2px;
+      width: 120px;
+      background-color: var(--primary-color);
+      margin: 25px auto;
+    }
+    
+    .divider::before {
+      content: "♥";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--primary-color);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    
+    .theme-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      transition: all 0.5s ease;
+      margin-bottom: 50px;
+      background-color: white;
+      position: relative;
+    }
+    
+    .theme-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+    
+    .card-img-top {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+    
+    .theme-card:hover .card-img-top {
+      transform: scale(1.08);
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .theme-card:hover .overlay {
+      opacity: 1;
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 5px 15px rgba(184, 115, 51, 0.3);
+    }
+    
+    .card-body {
+      padding: 30px;
+    }
+    
+    .card-title {
+      font-size: 26px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: var(--dark-color);
+    }
+    
+    .card-text {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #555;
+      background-color: rgba(184, 115, 51, 0.1);
+      padding: 6px 15px;
+      border-radius: 20px;
+    }
+    
+    .feature i {
+      color: var(--primary-color);
+      margin-right: 8px;
+    }
+    
+    .btn-view {
+      background-color: white;
+      color: var(--dark-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      padding: 12px 35px;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+    }
+    
+    .btn-view:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(184, 115, 51, 0.3);
+    }
+
+    .btn-select {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      color: white;
+      border: 2px solid white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      z-index: 10;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    
+    .btn-select:hover {
+      background-color: var(--primary-color);
+      transform: scale(1.2);
+      border-color: var(--primary-color);
+      opacity: 1;
+    }
+    
+    .btn-select.selected {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+    
+    .section-title h2 {
+      font-size: 44px;
+      margin-bottom: 20px;
+      color: var(--dark-color);
+    }
+    
+    .section-title p {
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 17px;
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: #999;
+      padding: 60px 0 40px;
+      margin-top: 100px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+      font-size: 15px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      margin: 0 8px;
+      color: #fff;
+      transition: all 0.4s ease;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .order-form {
+      background-color: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      margin-top: 70px;
+      margin-bottom: 70px;
+      position: relative;
+    }
+    
+    .order-form::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 30px;
+      background-color: rgba(184, 115, 51, 0.1);
+      border-radius: 15px 15px 0 0;
+      z-index: -1;
+    }
+    
+    .order-form h3 {
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 32px;
+      color: var(--dark-color);
+    }
+    
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 15px;
+    }
+    
+    .form-control {
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      background-color: #fafafa;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.2);
+      border-color: var(--primary-color);
+      background-color: white;
+    }
+    
+    .btn-submit {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 35px;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    .btn-submit:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(148, 89, 42, 0.3);
+    }
+    
+    .floating-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background-color: var(--primary-color);
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 10px 25px rgba(184, 115, 51, 0.3);
+      transition: all 0.4s ease;
+      z-index: 999;
+    }
+    
+    .floating-btn:hover {
+      transform: translateY(-8px) rotate(360deg);
+      background-color: var(--secondary-color);
+      box-shadow: 0 15px 30px rgba(184, 115, 51, 0.4);
+    }
+    
+    .floating-btn i {
+      transition: transform 0.3s ease;
+    }
+    
+    .floating-btn:hover i {
+      transform: scale(1.1);
+    }
+    
+    .modal-content {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+      border-bottom: none;
+      padding: 30px 30px 0 30px;
+    }
+    
+    .modal-body {
+      padding: 20px 30px 35px 30px;
+    }
+    
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--dark-color);
+      font-size: 28px;
+    }
+    
+    .selected-theme {
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: rgba(184, 115, 51, 0.07);
+      border-radius: 15px;
+      font-weight: 500;
+      font-size: 16px;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .selected-theme span {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 100px 0;
+      }
+      
+      .hero-section h1 {
+        font-size: 42px;
+      }
+      
+      .card-img-wrapper {
+        height: 220px;
+      }
+      
+      .order-form {
+        padding: 30px;
+      }
+      
+      .section-title h2 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero-section text-center">
+    <div class="container hero-content">
+      <h1>Undangan Digital <span class="accent-text">Elegance</span></h1>
+      <div class="divider"></div>
+      <p>Wujudkan momen spesial pernikahan Anda dengan undangan digital yang elegan dan bermakna</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Section Title -->
+    <div class="section-title">
+      <h2>Pilih <span class="accent-text">Tema</span> Anda</h2>
+      <div class="divider"></div>
+      <p>Kami menyediakan berbagai pilihan tema undangan yang indah dan elegan untuk momen spesial Anda</p>
+    </div>
+    
+    <!-- Themes Grid -->
+    <div class="row">
+      <!-- Theme 1 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="theme-card">
+          <div class="card-img-wrapper">
+            <button type="button" class="btn-select" data-theme-id="1" data-theme-name="Tema Elegan" onclick="selectTheme(this)">
+              <i class="fas fa-check"></i>
+            </button>
+            <img src="wedding/img/priview_tema/tema1.png" class="card-img-top" alt="Tema Elegan">
+            <div class="overlay"></div>
+            <div class="card-badge">Premium</div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Tema Elegan</h5>
+            <p class="card-text">Desain minimalis dengan tampilan elegan dan mewah, cocok untuk pernikahan formal dengan sentuhan klasik abadi.</p>
+            <div class="features">
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Animasi</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Musik</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Responsive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Theme 2 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="theme-card">
+          <div class="card-img-wrapper">
+            <button type="button" class="btn-select" data-theme-id="2" data-theme-name="Tema Romantis" onclick="selectTheme(this)">
+              <i class="fas fa-check"></i>
+            </button>
+            <img src="wedding/img/priview_tema/tema2.png" class="card-img-top" alt="Tema Romantis">
+            <div class="overlay"></div>
+            <div class="card-badge">Populer</div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Tema Romantis</h5>
+            <p class="card-text">Desain yang romantis untuk pasangan pengantin, Dengan Tampilan Minimalis dan cantik</p>
+            <div class="features">
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Responsif</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Musik</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Peta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Theme 3 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="theme-card">
+          <div class="card-img-wrapper">
+            <button type="button" class="btn-select" data-theme-id="3" data-theme-name="Tema Modern" onclick="selectTheme(this)">
+              <i class="fas fa-check"></i>
+            </button>
+            <img src="wedding/img/priview_tema/tema3.png" class="card-img-top" alt="Tema Modern">
+            <div class="overlay"></div>
+            <div class="card-badge">Baru</div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Tema Modern</h5>
+            <p class="card-text">Desain kontemporer dengan tampilan yang clean dan dinamis, ideal untuk pasangan yang menginginkan kesan modern.</p>
+            <div class="features">
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Animasi</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Gallery</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>RSVP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!-- Order Form Section -->
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="order-form">
+          <h3>Pesan Undangan Anda</h3>
+          <div class="divider"></div>
+          
+          <form id="orderForm" action="admin/process_orders.php" method="POST">
+            <input type="hidden" id="selectedThemeId" name="theme_id" value="">
+            <input type="hidden" id="selectedThemeName" name="theme_name" value="">
+            
+            <div class="selected-theme" id="selectedThemeDisplay">
+              Belum ada tema yang dipilih. Silakan pilih tema dengan mengklik tombol <i class="fas fa-check"></i> pada tema yang diinginkan.
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="groomName" class="form-label">Nama Mempelai Pria</label>
+                <input type="text" class="form-control" id="groomName" name="groom_name" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="brideName" class="form-label">Nama Mempelai Wanita</label>
+                <input type="text" class="form-control" id="brideName" name="bride_name" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="weddingDate" class="form-label">Tanggal Pernikahan</label>
+                <input type="date" class="form-control" id="weddingDate" name="wedding_date" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="weddingTime" class="form-label">Jam Pernikahan</label>
+                <input type="time" class="form-control" id="weddingTime" name="wedding_time" required>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="weddingVenue" class="form-label">Lokasi/Tempat Pernikahan</label>
+              <input type="text" class="form-control" id="weddingVenue" name="wedding_venue" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="venueAddress" class="form-label">Alamat Lengkap</label>
+              <textarea class="form-control" id="venueAddress" name="venue_address" rows="2" required></textarea>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="phoneNumber" class="form-label">Nomor Telepon (WhatsApp)</label>
+                <input type="tel" class="form-control" id="phoneNumber" name="phone_number" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="additionalInfo" class="form-label">Catatan Tambahan</label>
+              <textarea class="form-control" id="additionalInfo" name="additional_info" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">Kirim Pesanan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Floating Button -->
+  <a href="#orderForm" class="floating-btn">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+  
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="social-links mb-4">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+          <div class="footer-links mb-3">
+            <a href="#">Tentang Kami</a>
+            <a href="#">Layanan</a>
+            <a href="#">Tema</a>
+            <a href="#">FAQ</a>
+            <a href="#">Kontak</a>
+          </div>
+          <p>© 2025 Undangan Digital Elegance. Semua hak dilindungi.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Function to select a theme
+    function selectTheme(button) {
+      // Remove selected class from all buttons
+      document.querySelectorAll('.btn-select').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked button
+      button.classList.add('selected');
+      
+      // Get theme details
+      const themeId = button.getAttribute('data-theme-id');
+      const themeName = button.getAttribute('data-theme-name');
+      
+      // Update form hidden fields
+      document.getElementById('selectedThemeId').value = themeId;
+      document.getElementById('selectedThemeName').value = themeName;
+      
+      // Update display message
+      document.getElementById('selectedThemeDisplay').innerHTML = 
+        `Tema yang dipilih: <span>${themeName}</span>`;
+      
+      // Smooth scroll to form
+      document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Form validation
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+      const themeId = document.getElementById('selectedThemeId').value;
+      
+      if (!themeId) {
+        event.preventDefault();
+        alert('Silakan pilih tema terlebih dahulu sebelum mengirim pesanan.');
+        return false;
+      }
+      
+      // Additional validation can be added here
+      
+      return true;
+    });
+  </script>
+</body>
+</html>
